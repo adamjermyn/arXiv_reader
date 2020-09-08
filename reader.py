@@ -23,6 +23,8 @@ interest_file = out_dir + 'interested.md'
 # Parsing logic
 keys = ['id', 'title', 'link', 'summary', 'authors']
 def extract_name_from_link(link):
+	print(link)
+	print(link.split('>'))
 	link = link.split('>')[1]
 	link = link.split('<')[0]
 	return link
@@ -34,7 +36,7 @@ def parse_entry(entry):
 	link = entry['link']
 	abstract = markdownify(entry['summary'])
 	authors = entry['authors'][0]['name'].split(',')
-	authors = [extract_name_from_link(author) for author in authors]
+	authors = [extract_name_from_link(author) for author in authors if 'arxiv.org' in author]
 
 	s = ['# ' + title, abstract, '- ' + ', '.join(authors), '- ' + link]
 	s = '\n'.join(s)
