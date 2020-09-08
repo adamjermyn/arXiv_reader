@@ -23,8 +23,6 @@ interest_file = out_dir + 'interested.md'
 # Parsing logic
 keys = ['id', 'title', 'link', 'summary', 'authors']
 def extract_name_from_link(link):
-	print(link)
-	print(link.split('>'))
 	link = link.split('>')[1]
 	link = link.split('<')[0]
 	return link
@@ -70,6 +68,7 @@ for sub_arXiv in sub_arXivs:
 	for entry in feed.entries:
 		formatted_entry, authors, link = parse_entry(entry)
 		if link not in records:
+			print(link)
 
 			console.print(Markdown(formatted_entry))
 			console.print('')
@@ -82,11 +81,11 @@ for sub_arXiv in sub_arXivs:
 				pdf_link = link.replace('abs','pdf') + '.pdf'
 				fname = format_pdf_name(authors, link)
 				urllib.request.urlretrieve(pdf_link, pdf_dir + fname + '.pdf')
-				print(pdf_dir + fname + '.pdf')
 
+			records.add(link)
 			record_fi.write(link + '\n')
 			record_fi.flush()
 			interest_fi.flush()
 
-record_file.close()
+record_fi.close()
 interest_fi.close()
