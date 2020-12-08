@@ -1,5 +1,5 @@
 # arXiv_reader
-An interactive python package for reading the daily arXiv posting, either via RSS or email.
+An interactive python package for reading the daily arXiv posting, either via RSS, email, or the arXiv API.
 
 ## Configuration
 The configuration is stored in `reader.py` in the following lines:
@@ -45,4 +45,11 @@ The email reader is called much the same way:
 python email_reader.py
 ```
 
-Note that the RSS and email readers use the same format for storing processed and of-interest papers, so you can use them interchangeably and be assured that you won't see the same paper twice.
+The API reader is called as
+```
+python api_reader.py [days to look back]
+```
+If no option is specified the API reader will only consider new postings from within the last two days.
+Otherwise an integer should be specified which gives the number of days to look back.
+
+Note that all three readers use the same format for storing processed and of-interest papers, so you can use them interchangeably and be assured that you won't see the same paper twice.
